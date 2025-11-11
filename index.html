@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FH Development</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-container img {
+            height: 50px;
+            width: auto;
+        }
+
+        .logo-container h1 {
+            color: #119eec;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #119eec;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .bubble {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stars {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .staff-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .staff-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #119eec;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .sponsor-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .sponsor-item {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .sponsor-logo {
+            width: 80px;
+            height: 80px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #119eec;
+        }
+
+        .btn {
+            background: #119eec;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0d7ec0;
+        }
+
+        .btn-discord {
+            background: #5865F2;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-discord:hover {
+            background: #4752C4;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-card h3 {
+            color: #119eec;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #119eec;
+            margin: 1rem 0;
+        }
+
+        .input-group {
+            margin: 1rem 0;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #119eec;
+        }
+
+        footer {
+            background: rgba(0,0,0,0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .account-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-container">
+            <img src="logo.png" alt="FH Development Logo" onerror="this.style.display='none'">
+            <h1>FH Development</h1>
+        </div>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('staff')">Staff</a></li>
+            <li><a href="#" onclick="showPage('sponsors')">Sponsors</a></li>
+            <li><a href="#" onclick="showPage('products')" id="productsLink" class="hidden">Products</a></li>
+            <li><a href="#" onclick="showPage('account')" id="accountLink" class="hidden">Account</a></li>
+            <li><a href="#" onclick="showPage('support')">Support</a></li>
+            <li><a href="#" onclick="showPage('signin')" id="signinLink">Sign In</a></li>
+            <li><a href="#" onclick="logout()" id="logoutLink" class="hidden">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page">
+            <div class="hero">
+                <h2>Welcome to FH Development</h2>
+                <p style="color: white; font-size: 1.2rem;">Premium Roblox Development Solutions</p>
+            </div>
+
+            <div class="bubble">
+                <h3 style="color: #119eec; margin-bottom: 1rem;">🚀 Professional Development</h3>
+                <p>We provide high-quality Roblox development tools and scripts to enhance your gaming experience. Our products are designed with performance and reliability in mind.</p>
+            </div>
+
+            <div class="bubble">
+                <h3 style="color: #119eec; margin-bottom: 1rem;">💡 Innovative Solutions</h3>
+                <p>From auto moderation to custom commands, we offer cutting-edge solutions that make game management easier and more efficient.</p>
+            </div>
+
+            <div class="reviews">
+                <div class="review-card">
+                    <h4>Amazing Service!</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>"FH Development has transformed how I manage my Roblox games. The auto moderation is a game changer!"</p>
+                    <p style="margin-top: 1rem; font-weight: bold;">- Alex Thompson</p>
+                </div>
+                <div class="review-card">
+                    <h4>Highly Recommended</h4>
+                    <div class="stars">★★★★★</div>
+                    <p>"Professional, reliable, and excellent support. The goto commands have saved me so much time. Worth every Robux!"</p>
+                    <p style="margin-top: 1rem; font-weight: bold;">- Sarah Martinez</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAFF PAGE -->
+        <div id="staffPage" class="page hidden">
+            <h2 style="color: white; margin-bottom: 2rem;">Our Team</h2>
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-avatar">👨‍💻</div>
+                    <h3>John Smith</h3>
+                    <p style="color: #119eec; margin: 0.5rem 0;">Lead Developer</p>
+                    <p>Specializes in Roblox scripting and game optimization with 5+ years of experience.</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">👩‍💼</div>
+                    <h3>Emma Wilson</h3>
+                    <p style="color: #119eec; margin: 0.5rem 0;">Project Manager</p>
+                    <p>Ensures smooth operations and client satisfaction across all projects.</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">👨‍🎨</div>
+                    <h3>Michael Chen</h3>
+                    <p style="color: #119eec; margin: 0.5rem 0;">UI/UX Designer</p>
+                    <p>Creates intuitive and beautiful interfaces for all our products.</p>
+                </div>
+                <div class="staff-card">
+                    <div class="staff-avatar">👩‍💻</div>
+                    <h3>Sophie Anderson</h3>
+                    <p style="color: #119eec; margin: 0.5rem 0;">Support Specialist</p>
+                    <p>Provides top-notch customer support and technical assistance.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPONSORS PAGE -->
+        <div id="sponsorsPage" class="page hidden">
+            <h2 style="color: white; margin-bottom: 2rem;">Our Sponsors</h2>
+            <div class="sponsor-list">
+                <div class="sponsor-item">
+                    <div class="sponsor-logo">RG</div>
+                    <div style="flex: 1;">
+                        <h3>RobloxGaming Studios</h3>
+                        <p style="color: #666;">Owner: David Roberts</p>
+                        <a href="https://robloxgaming.example" style="color: #119eec;">Visit Website</a>
+                    </div>
+                </div>
+                <div class="sponsor-item">
+                    <div class="sponsor-logo">TD</div>
+                    <div style="flex: 1;">
+                        <h3>TechDev Solutions</h3>
+                        <p style="color: #666;">Owner: Lisa Chang</p>
+                        <a href="https://techdev.example" style="color: #119eec;">Visit Website</a>
+                    </div>
+                </div>
+                <div class="sponsor-item">
+                    <div class="sponsor-logo">GX</div>
+                    <div style="flex: 1;">
+                        <h3>GameXpert Network</h3>
+                        <p style="color: #666;">Owner: Marcus Johnson</p>
+                        <a href="https://gamexpert.example" style="color: #119eec;">Visit Website</a>
+                    </div>
+                </div>
+                <div class="sponsor-item">
+                    <div class="sponsor-logo">PS</div>
+                    <div style="flex: 1;">
+                        <h3>PixelStorm Games</h3>
+                        <p style="color: #666;">Owner: Rachel Kim</p>
+                        <a href="https://pixelstorm.example" style="color: #119eec;">Visit Website</a>
+                    </div>
+                </div>
+                <div class="sponsor-item">
+                    <div class="sponsor-logo">CD</div>
+                    <div style="flex: 1;">
+                        <h3>CodeCraft Studios</h3>
+                        <p style="color: #666;">Owner: Tom Harrison</p>
+                        <a href="https://codecraft.example" style="color: #119eec;">Visit Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGN IN PAGE -->
+        <div id="signinPage" class="page hidden">
+            <div class="bubble" style="max-width: 500px; margin: 4rem auto;">
+                <h2 style="color: #119eec; margin-bottom: 2rem; text-align: center;">Sign In</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">Sign in with Discord to access your account and products</p>
+                <button class="btn btn-discord" onclick="loginWithDiscord()" style="width: 100%; justify-content: center;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                    Sign in with Discord
+                </button>
+            </div>
+        </div>
+
+        <!-- ACCOUNT PAGE -->
+        <div id="accountPage" class="page hidden">
+            <h2 style="color: white; margin-bottom: 2rem;">Account Settings</h2>
+            
+            <div class="account-section">
+                <h3 style="color: #119eec; margin-bottom: 1.5rem;">Discord Account</h3>
+                <div class="user-info" id="discordInfo">
+                    <img src="" alt="Profile" class="user-avatar" id="discordAvatar">
+                    <div>
+                        <h4 id="discordUsername">Loading...</h4>
+                        <p style="color: #666;" id="discordId">ID: ...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="account-section">
+                <h3 style="color: #119eec; margin-bottom: 1.5rem;">Roblox Account</h3>
+                <div id="robloxLinked" class="hidden">
+                    <div class="user-info">
+                        <div>
+                            <h4 id="robloxUsername">Username</h4>
+                            <p style="color: #666;" id="robloxId">ID: ...</p>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="unlinkRoblox()">Unlink Account</button>
+                </div>
+                <div id="robloxUnlinked">
+                    <p style="margin-bottom: 1rem;">Link your Roblox account to purchase and download products.</p>
+                    <div class="input-group">
+                        <label>Roblox Username</label>
+                        <input type="text" id="robloxUsernameInput" placeholder="Enter your Roblox username">
+                    </div>
+                    <div class="input-group">
+                        <label>Roblox User ID</label>
+                        <input type="text" id="robloxUserIdInput" placeholder="Enter your Roblox User ID">
+                    </div>
+                    <button class="btn" onclick="linkRoblox()">Link Roblox Account</button>
+                </div>
+                <div id="linkMessage"></div>
+            </div>
+        </div>
+
+        <!-- PRODUCTS PAGE -->
+        <div id="productsPage" class="page hidden">
+            <h2 style="color: white; margin-bottom: 2rem;">Our Products</h2>
+            <div id="productMessage"></div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <h3>Auto Moderation</h3>
+                    <p>Advanced automated moderation system to keep your game safe and clean. Filters chat, detects exploits, and manages bans efficiently.</p>
+                    <div class="price">150 R$</div>
+                    <button class="btn" onclick="purchaseProduct('3435548665', 'Auto Moderation')">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <h3>Goto Commands</h3>
+                    <p>Powerful teleportation and navigation commands for admins. Quickly move between players and locations in your game.</p>
+                    <div class="price">100 R$</div>
+                    <button class="btn" onclick="purchaseProduct('3435529457', 'Goto Commands')">Buy Now</button>
+                </div>
+                <div class="product-card">
+                    <h3>Music Commands</h3>
+                    <p>Complete music control system with queue management, volume control, and a library of popular tracks for your game.</p>
+                    <div class="price">75 R$</div>
+                    <button class="btn" onclick="purchaseProduct('3435533076', 'Music Commands')">Buy Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUPPORT PAGE -->
+        <div id="supportPage" class="page hidden">
+            <div class="bubble" style="max-width: 600px; margin: 4rem auto; text-align: center;">
+                <h2 style="color: #119eec; margin-bottom: 2rem;">Need Help?</h2>
+                <p style="margin-bottom: 2rem;">Join our Discord server for support, updates, and to connect with our community!</p>
+                <a href="https://discord.gg/3A8kakMmtt" target="_blank" class="btn btn-discord" style="text-decoration: none; display: inline-flex;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                    Join Discord Server
+                </a>
+                <p style="margin-top: 2rem; color: #666;">Our support team typically responds within 24 hours.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ in Lincolnshire</p>
+        <p style="margin-top: 0.5rem;">FH Development © 2024</p>
+    </footer>
+
+    <script>
+        const DISCORD_CLIENT_ID = '1432365276078542878';
+        const REDIRECT_URI = 'https://fisteywol.github.io/fh-development/';
+        const DATABASE_URL = 'postgresql://neondb_owner:npg_7nzwQqWkI9dF@ep-snowy-shadow-abloro8b-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require';
+        
+        let userData = null;
+
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+            document.getElementById(pageName + 'Page').classList.remove('hidden');
+        }
+
+        function loginWithDiscord() {
+            const state = Math.random().toString(36).substring(7);
+            sessionStorage.setItem('oauth_state', state);
+            const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&response_type=token&scope=identify&state=${state}`;
+            window.location.href = authUrl;
+        }
+
+        async function handleOAuthCallback() {
+            const hash = window.location.hash.substring(1);
+            if (!hash) return;
+
+            const params = new URLSearchParams(hash);
+            const accessToken = params.get('access_token');
+            const state = params.get('state');
+
+            if (accessToken && state === sessionStorage.getItem('oauth_state')) {
+                try {
+                    const response = await fetch('https://discord.com/api/users/@me', {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    });
+                    const discordUser = await response.json();
+                    
+                    userData = {
+                        discordId: discordUser.id,
+                        discordUsername: discordUser.username,
+                        discordAvatar: `https://cdn.discordapp.com/avatars/${discordUser.id}/${discordUser.avatar}.png`,
+                        robloxLinked: false
+                    };
+
+                    await loadUserData();
+                    
+                    sessionStorage.removeItem('oauth_state');
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    
+                    updateUIForLoggedIn();
+                } catch (error) {
+                    console.error('Error fetching Discord user:', error);
+                    alert('Failed to sign in. Please try again.');
+                }
+            }
+        }
+
+        async function loadUserData() {
+            // Simulate loading user data from NeonDB
+            const stored = localStorage.getItem('userData_' + userData.discordId);
+            if (stored) {
+                const data = JSON.parse(stored);
+                userData = { ...userData, ...data };
+            }
+        }
+
+        async function saveUserData() {
+            // Simulate saving to NeonDB using localStorage
+            localStorage.setItem('userData_' + userData.discordId, JSON.stringify(userData));
+        }
+
+        function updateUIForLoggedIn() {
+            document.getElementById('signinLink').classList.add('hidden');
+            document.getElementById('logoutLink').classList.remove('hidden');
+            document.getElementById('accountLink').classList.remove('hidden');
+            document.getElementById('productsLink').classList.remove('hidden');
+
+            document.getElementById('discordUsername').textContent = userData.discordUsername;
+            document.getElementById('discordId').textContent = 'ID: ' + userData.discordId;
+            document.getElementById('discordAvatar').src = userData.discordAvatar;
+
+            if (userData.robloxLinked) {
+                document.getElementById('robloxLinked').classList.remove('hidden');
+                document.getElementById('robloxUnlinked').classList.add('hidden');
+                document.getElementById('robloxUsername').textContent = userData.robloxUsername;
+                document.getElementById('robloxId').textContent = 'ID: ' + userData.robloxUserId;
+            } else {
+                showPage('account');
+                showMessage('linkMessage', 'Please link your Roblox account to continue.', 'info');
+            }
+        }
+
+        function logout() {
+            userData = null;
+            localStorage.clear();
+            document.getElementById('signinLink').classList.remove('hidden');
+            document.getElementById('logoutLink').classList.add('hidden');
+            document.getElementById('accountLink').classList.add('hidden');
+            document.getElementById('productsLink').classList.add('hidden');
+            showPage('home');
+        }
+
+        async function linkRoblox() {
+            const username = document.getElementById('robloxUsernameInput').value.trim();
+            const userId = document.getElementById('robloxUserIdInput').value.trim();
+
+            if (!username || !userId) {
+                showMessage('linkMessage', 'Please enter both username and user ID.', 'error');
+                return;
+            }
+
+            try {
+                // Verify Roblox account via API
+                const response = await fetch(`https://users.roblox.com/v1/users/${userId}`);
+                if (!response.ok) {
+                    showMessage('linkMessage', 'Invalid Roblox User ID. Please check and try again.', 'error');
+                    return;
+                }
+
+                const robloxData = await response.json();
+                
+                if (robloxData.name.toLowerCase() !== username.toLowerCase()) {
+                    showMessage('linkMessage', 'Username does not match User ID. Please verify your information.', 'error');
+                    return;
+                }
+
+                userData.robloxLinked = true;
+                userData.robloxUsername = robloxData.name;
+                userData.robloxUserId = userId;
+                userData.ownedProducts = [];
+
+                await saveUserData();
+                
+                document.getElementById('robloxLinked').classList.remove('hidden');
+                document.getElementById('robloxUnlinked').classList.add('hidden');
+                document.getElementById('robloxUsername').textContent = robloxData.name;
+                document.getElementById('robloxId').textContent = 'ID: ' + userId;
+                
+                showMessage('linkMessage', 'Roblox account linked successfully!', 'success');
+            } catch (error) {
+                console.error('Error linking Roblox account:', error);
+                showMessage('linkMessage', 'Failed to verify Roblox account. Please try again.', 'error');
+            }
+        }
+
+        function unlinkRoblox() {
+            if (confirm('Are you sure you want to unlink your Roblox account? You will lose access to purchased products until you link again.')) {
+                userData.robloxLinked = false;
+                userData.robloxUsername = null;
+                userData.robloxUserId = null;
+                saveUserData();
+                
+                document.getElementById('robloxLinked').classList.add('hidden');
+                document.getElementById('robloxUnlinked').classList.remove('hidden');
+                document.getElementById('robloxUsernameInput').value = '';
+                document.getElementById('robloxUserIdInput').value = '';
+                
+                showMessage('linkMessage', 'Roblox account unlinked.', 'info');
+            }
+        }
+
+        async function purchaseProduct(productId, productName) {
+            if (!userData || !userData.robloxLinked) {
+                showMessage('productMessage', 'Please link your Roblox account first.', 'error');
+                showPage('account');
+                return;
+            }
+
+            showMessage('productMessage', `Checking ownership of ${productName}...`, 'info');
+
+            try {
+                // Check if user owns the developer product
+                const ownsProduct = await checkProductOwnership(userData.robloxUserId, productId);
+
+                if (!ownsProduct) {
+                    showMessage('productMessage', `Please purchase ${productName} in Roblox first. Opening Roblox...`, 'info');
+                    
+                    // Open Roblox to purchase (user needs to purchase in a Roblox game)
+                    window.open(`https://www.roblox.com/games/refer?PlaceId=YOUR_PLACE_ID&ProductId=${productId}`, '_blank');
+                    
+                    showMessage('productMessage', `After purchasing in Roblox, click "Buy Now" again to verify and download.`, 'info');
+                    return;
+                }
+
+                // User owns the product, allow download
+                if (!userData.ownedProducts) userData.ownedProducts = [];
+                if (!userData.ownedProducts.includes(productId)) {
+                    userData.ownedProducts.push(productId);
+                    await saveUserData();
+                }
+
+                downloadProduct(productId, productName);
+                showMessage('productMessage', `${productName} download started! Check your downloads folder.`, 'success');
+            } catch (error) {
+                console.error('Error purchasing product:', error);
+                showMessage('productMessage', 'Error verifying purchase. Please try again.', 'error');
+            }
+        }
+
+        async function checkProductOwnership(userId, productId) {
+            // Simulate checking product ownership
+            // In a real implementation, you would check via Roblox API or your backend
+            // For demo purposes, we'll simulate this
+            
+            // Check if already marked as owned
+            if (userData.ownedProducts && userData.ownedProducts.includes(productId)) {
+                return true;
+            }
+
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            
+            // For demo: return false to simulate needing to purchase
+            // In production, you'd actually check the Roblox API
+            return false;
+        }
+
+        function downloadProduct(productId, productName) {
+            // Create a dummy zip file download
+            const content = `# ${productName}\n\nThank you for your purchase!\n\nProduct ID: ${productId}\n\nInstallation instructions:\n1. Extract this ZIP file\n2. Follow the README.md for setup\n3. Contact support if you need help\n\nDiscord: https://discord.gg/3A8kakMmtt`;
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${productName.replace(/\s+/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function showMessage(elementId, message, type) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 5000);
+        }
+
+        // Check for OAuth callback on page load
+        window.addEventListener('load', () => {
+            handleOAuthCallback();
+            
+            // Check if user is already logged in
+            const storedUsers = Object.keys(localStorage).filter(key => key.startsWith('userData_'));
+            if (storedUsers.length > 0 && !userData) {
+                // Auto-login with last used account
+                const lastUser = JSON.parse(localStorage.getItem(storedUsers[0]));
+                userData = lastUser;
+                updateUIForLoggedIn();
+            }
+        });
+    </script>
+</body>
+</html>
